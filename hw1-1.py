@@ -4,46 +4,74 @@ ocr = loadmat('ocr.mat')
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-plt.imshow(ocr['data'][0].reshape((28,28)), cmap = cm.gray_r)
-plt.show()
-
-plt.imshow(ocr['testdata'][0].reshape((28,28)), cmap = cm.gray_r)
-plt.show()
-
-# Write a function that implements the 1-nearest neighbor classier with Euclidean distance.
-# Your function should take as input a matrix of training feature vectors X and a vector of the
-# corresponding labels Y, as well as a matrix of test feature vectors test. 
-
+import random
 import numpy as np
 
-np.matrix([[1, 2], [3, 4]])
+import datetime 
+import csv
+#plt.imshow(ocr['data'][0].reshape((28,28)), cmap = cm.gray_r)
+#plt.show()
 
+def dist(x, y):
+	diff = x - y
+	return diff.dot(diff)	
 
-z = np.column_stack((ocr['data'], ocr['labels']))
+def nnClassifier(trainingData, trainingLabels, testData, testLabels):
+	total_count = len(testLabels)
+	wrong_count = 0
+	for testVector, testLabel in zip(testData, testLabels):
+		# find the closest training vector
+		minDist = float('inf')
+		minLabel = None
+		for trainingVector, trainingLabel in zip(trainingData, trainingLabels):
+			d = dist(testVector, trainingVector)
+			if d < minDist:
+				minDist = d
+				minLabel = trainingLabel
 
-print z
+		# check if minLabel is correct
+		if minLabel != testLabel:
+			wrong_count += 1
 
-# The output should be a
-# vector of predicted labels preds for all the test points. Naturally, you should not use (or look at the
-# source code for) any library functions for computing Euclidean distances, nearest neighbor queries,
-# and so on. If in doubt about what is okay to use, just ask.
-# For effciency, you should use vector operations (rather than, say, a bunch of for-loops). See
-# http://www.mathworks.com/help/matlab/matlab_prog/vectorization.html to learn how to
-# do this in MATLAB.
-# Instead of using your 1-NN code directly with data and labels as the training data, do the
-# following. For each value n 2 f1000; 2000; 4000; 8000g,
+	errorRate = float(wrong_count) / total_count
+	return errorRate
 
-# Draw n random points from data, together with their corresponding labels. In matlab,
-# use sel = randsample(60000,n) to pick the n random indices, and data(sel,:) and
-# labels(sel) to select the examples; in Python, use sel = random.sample(xrange(60000),n)
-# (after import random), ocr['data'][sel], and ocr['labels'][sel].
+testData = ocr['testdata']
+testLabels = ocr['testlabels']
 
-# import random
-# sel = random.sample(xrange(60000),n)
+z = 10000 #for testing set z at 100
+#save data to csv after loop, do it 10 times. change sample_sizes back and remove selz
 
-# ocr['data'][sel]
-# ocr['labels'][sel]
+sample_sizes = [1000,2000,4000,8000]
+#sample_sizes = [100,200,400,800]
+for i in range(10):
+	dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+	dt = dt.replace(' ','-').replace(':','-')
+	print dt
 
+	error_rates = []
+	for n in sample_sizes:
+		print n
+		sel = random.sample(xrange(60000),n)
+		trainingData = ocr['data'][sel]
+		trainingLabels = ocr['labels'][sel]
+
+		selz = random.sample(xrange(10000),z)
+		testData = ocr['testdata'][selz]
+		testLabels = ocr['testlabels'][selz]
+
+		e = nnClassifier(trainingData, trainingLabels, testData, testLabels)
+		error_rates.append(e)
+
+	print error_rates
+
+	with open("data/output"+dt+".csv", "wb") as f:
+		writer = csv.writer(f)
+		row = sample_sizes, error_rates
+		writer.writerows(row)
+
+#plt.plot(sample_sizes, error_rates)
+#plt.show()
 
 # Use these n points as the training data and test data as the test points, and compute the
 # test error rate of the 1-NN classier.
@@ -53,7 +81,6 @@ print z
 
 # Since the above process involves some randomness, you should repeat it independently several
 # times (say, at least ten times). 
-
 
 # Produce an estimate of the learning curve plot using the average of
 # these test error rates (that is, averaging over the repeated trials). Add error bars to your plot that
