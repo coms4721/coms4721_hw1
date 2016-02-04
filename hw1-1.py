@@ -25,12 +25,16 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 		minLabel = None
 		for trainingVector, trainingLabel in zip(trainingData, trainingLabels):
 			d = dist(testVector, trainingVector)
+			#print 'd:', d, 'minDist:', minDist
 			if d < minDist:
 				minDist = d
 				minLabel = trainingLabel
+				minLabel = testLabel
 
 		# check if minLabel is correct
-		if minLabel != testLabel:
+		#print 'minLabel:', minLabel[0], 'trainingLabel:', trainingLabel[0], 'testLabel:', testLabel[0]
+		
+		if minLabel[0] != testLabel[0]:
 			wrong_count += 1
 
 	errorRate = float(wrong_count) / total_count
