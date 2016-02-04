@@ -39,7 +39,7 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 testData = ocr['testdata']
 testLabels = ocr['testlabels']
 
-z = 10000 #for testing set z at 100
+# z = 10000 #for testing set z at 100
 #save data to csv after loop, do it 10 times. change sample_sizes back and remove selz
 
 sample_sizes = [1000,2000,4000,8000]
@@ -56,9 +56,9 @@ for i in range(10):
 		trainingData = ocr['data'][sel]
 		trainingLabels = ocr['labels'][sel]
 
-		selz = random.sample(xrange(10000),z)
-		testData = ocr['testdata'][selz]
-		testLabels = ocr['testlabels'][selz]
+		# selz = random.sample(xrange(10000),z)
+		# testData = ocr['testdata'][selz]
+		# testLabels = ocr['testlabels'][selz]
 
 		e = nnClassifier(trainingData, trainingLabels, testData, testLabels)
 		error_rates.append(e)
@@ -69,6 +69,9 @@ for i in range(10):
 		writer = csv.writer(f)
 		row = sample_sizes, error_rates
 		writer.writerows(row)
+
+# TAKES ABOUT [Finished in 21415.4s] ABOUT 5.948722222 HOURS
+
 
 #plt.plot(sample_sizes, error_rates)
 #plt.show()
