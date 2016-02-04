@@ -3,7 +3,6 @@ ocr = loadmat('ocr.mat')
 
 import matplotlib.pyplot as plt
 from matplotlib import cm
-<<<<<<< Updated upstream
 
 import random
 import numpy as np
@@ -79,28 +78,6 @@ for i in range(10):
 #plt.plot(sample_sizes, error_rates)
 #plt.show()
 
-=======
-plt.imshow(ocr['data'][0].reshape((28,28)), cmap = cm.gray_r)
-plt.show()
-
-# Write a function that implements the 1-nearest neighbor classifer with Euclidean distance.
-# Your function should take as input a matrix of training feature vectors X and a vector of the
-# corresponding labels Y, as well as a matrix of test feature vectors test. The output should be a
-# vector of predicted labels preds for all the test points. Naturally, you should not use (or look at the
-# source code for) any library functions for computing Euclidean distances, nearest neighbor queries,
-# and so on. If in doubt about what is okay to use, just ask.
-# For effciency, you should use vector operations (rather than, say, a bunch of for-loops). See
-# http://www.mathworks.com/help/matlab/matlab_prog/vectorization.html to learn how to
-# do this in MATLAB.
-
-# Instead of using your 1-NN code directly with data and labels as the training data, do the
-# following. For each value n 2 f1000; 2000; 4000; 8000g,
-
-# Draw n random points from data, together with their corresponding labels. In matlab,
-# use sel = randsample(60000,n) to pick the n random indices, and data(sel,:) and
-# labels(sel) to select the examples; in Python, use sel = random.sample(xrange(60000),n)
-# (after import random), ocr['data'][sel], and ocr['labels'][sel].
->>>>>>> Stashed changes
 # Use these n points as the training data and test data as the test points, and compute the
 # test error rate of the 1-NN classier.
 
