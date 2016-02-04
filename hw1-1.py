@@ -34,16 +34,18 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 			wrong_count += 1
 
 	errorRate = float(wrong_count) / total_count
+	print errorRate
 	return errorRate
 
 testData = ocr['testdata']
 testLabels = ocr['testlabels']
 
-# z = 10000 #for testing set z at 100
+z = 100 #for testing set z at 100
 #save data to csv after loop, do it 10 times. change sample_sizes back and remove selz
 
 sample_sizes = [1000,2000,4000,8000]
-#sample_sizes = [100,200,400,800]
+sample_sizes = [100,200,400,800]
+
 for i in range(10):
 	dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 	dt = dt.replace(' ','-').replace(':','-')
@@ -56,9 +58,9 @@ for i in range(10):
 		trainingData = ocr['data'][sel]
 		trainingLabels = ocr['labels'][sel]
 
-		# selz = random.sample(xrange(10000),z)
-		# testData = ocr['testdata'][selz]
-		# testLabels = ocr['testlabels'][selz]
+		selz = random.sample(xrange(10000),z)
+		testData = ocr['testdata'][selz]
+		testLabels = ocr['testlabels'][selz]
 
 		e = nnClassifier(trainingData, trainingLabels, testData, testLabels)
 		error_rates.append(e)
