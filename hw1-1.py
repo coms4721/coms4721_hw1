@@ -29,7 +29,7 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 			if d < minDist:
 				minDist = d
 				minLabel = trainingLabel
-				minLabel = testLabel
+				#minLabel = testLabel
 
 		# check if minLabel is correct
 		#print 'minLabel:', minLabel[0], 'trainingLabel:', trainingLabel[0], 'testLabel:', testLabel[0]
