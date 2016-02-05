@@ -32,11 +32,12 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 				#minLabel = testLabel
 
 		# check if minLabel is correct
-		#print 'minLabel:', minLabel[0], 'trainingLabel:', trainingLabel[0], 'testLabel:', testLabel[0]
-		
-		if minLabel[0] != testLabel[0]:
+		print 'minLabel:', minLabel[0], 'trainingLabel:', trainingLabel[0], 'testLabel:', testLabel[0]
+		#print testLabel[0]
+		if minLabel[0] == testLabel[0]:
 			wrong_count += 1
-
+		
+	print 'wrongcount:', wrong_count
 	errorRate = float(wrong_count) / total_count
 	print errorRate
 	return errorRate
