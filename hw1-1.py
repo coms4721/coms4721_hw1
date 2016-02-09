@@ -13,7 +13,7 @@ import csv
 #plt.show()
 
 def dist(x, y):
-	diff = x - y
+	diff = x.astype(np.float32) - y.astype(np.float32)
 	return diff.dot(diff)	
 
 def nnClassifier(trainingData, trainingLabels, testData, testLabels):
@@ -29,12 +29,11 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 			if d < minDist:
 				minDist = d
 				minLabel = trainingLabel
-				#minLabel = testLabel
 
 		# check if minLabel is correct
-		print 'minLabel:', minLabel[0], 'trainingLabel:', trainingLabel[0], 'testLabel:', testLabel[0]
+		# print 'minLabel:', minLabel[0], 'trainingLabel:', trainingLabel[0], 'testLabel:', testLabel[0]
 		#print testLabel[0]
-		if minLabel[0] == testLabel[0]:
+		if minLabel[0] != testLabel[0]:
 			wrong_count += 1
 		
 	print 'wrongcount:', wrong_count
@@ -45,11 +44,11 @@ def nnClassifier(trainingData, trainingLabels, testData, testLabels):
 testData = ocr['testdata']
 testLabels = ocr['testlabels']
 
-z = 100 #for testing set z at 100
+#z = 1000 #for testing set z at 100
 #save data to csv after loop, do it 10 times. change sample_sizes back and remove selz
 
 sample_sizes = [1000,2000,4000,8000]
-sample_sizes = [100,200,400,800]
+#sample_sizes = [100,200,400,800]
 
 for i in range(10):
 	dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -63,9 +62,9 @@ for i in range(10):
 		trainingData = ocr['data'][sel]
 		trainingLabels = ocr['labels'][sel]
 
-		selz = random.sample(xrange(10000),z)
-		testData = ocr['testdata'][selz]
-		testLabels = ocr['testlabels'][selz]
+		# selz = random.sample(xrange(10000),z)
+		# testData = ocr['testdata'][selz]
+		# testLabels = ocr['testlabels'][selz]
 
 		e = nnClassifier(trainingData, trainingLabels, testData, testLabels)
 		error_rates.append(e)
@@ -78,7 +77,6 @@ for i in range(10):
 		writer.writerows(row)
 
 # TAKES ABOUT [Finished in 21415.4s] ABOUT 5.948722222 HOURS
-
 
 #plt.plot(sample_sizes, error_rates)
 #plt.show()
