@@ -1,0 +1,7 @@
+f star is the classifier
+
+
+
+The formula for question 2 part a is just the forumaul in (b) but get rid of 1 + and the 2 + 
+
+
