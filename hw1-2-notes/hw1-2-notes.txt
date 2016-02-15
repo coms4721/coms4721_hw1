@@ -1,0 +1,63 @@
+
+always predicting a function X --> Y
+
+X = input
+Y = output
+
+X = data
+Y = label
+
+
+get parameters that estimate Y_hat = f(X)
+in other words Y_prediction = machine_learning_model_params(X_input)
+
+
+### training phase
+training_input, training_output
+use training_input and training_output --> model params
+
+
+### testing phase, use test_input and test_output
+use model params to make predictions on test_data (== test_input)
+
+
+call these your test_predictions
+
+i want to see if how many test_predictions are == test_output
+
+
+##### dot product
+if you have 2 vectors, x = [x1, x2, x3], w = [w1, w2, w3]
+the dot product dot(x,w) = x1*w1 + x2*w2 + x3*w3
+
+
+####### format of X
+- input is a matrix - of size (N, D)
+- N number of samples
+- D is number of dimensions == number of words == vocabulary size
+- one row of X is one sample
+X = [
+	x1
+	x2
+	x3
+	....
+	xN
+]
+
+Y = [1, 20, 3, 4, 5, 1, ...]
+
+forum1
+ll_1 = w1*x + b1
+
+forum2
+ll_2 = w2*x + b2
+
+forum3
+ll_3 = w3*x + b3
+
+....
+
+
+
+
+
