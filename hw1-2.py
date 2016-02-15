@@ -138,10 +138,10 @@ for i, k in enumerate(dfw):
 	j = k.tolist()
 	df = pd.DataFrame(j)
 	df = df.T
-	df.columns = ['values']
+	df.columns = ['weights']
 	df['guid'] = i + 1
 	df['vuid'] = df.index + 1
-	df = df.sort('values', ascending=False).head(20)
+	df = df.sort('weights', ascending=False).head(20)
 
 
 	print df.head(25)
