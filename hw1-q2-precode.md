@@ -1,6 +1,6 @@
 #Problem 2
 
-$P(X\ | \ class) = 	\Pi_{j = 1}^{d} \mu_{j}^{x_j} (1 - \mu_j )^{x_j}$
+$P(X\ | \ class) = 	\prod_{j = 1}^{d} \mu_{j}^{x_j} (1 - \mu_j )^{x_j}$
 
 $L = log(.....) \rightarrow \left(\frac{\delta L}{\mu_j} \right) = \delta $
 
